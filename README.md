@@ -9,7 +9,17 @@ Single-page agency website for EXORA SOLUTIONS, prepared for direct GitHub Pages
 
 No build tools, package installation, or framework setup is required.
 
-## Deploy To GitHub Pages
+## Automatic Deploy With GitHub Actions
+
+This repository includes `.github/workflows/deploy.yaml`, which deploys the static site to GitHub Pages whenever changes are pushed to `main`.
+
+To enable it:
+
+1. In GitHub, open the repository and go to `Settings > Pages`.
+2. Under `Build and deployment`, set the source to `GitHub Actions`.
+3. Push changes to the `main` branch, or manually run the `Deploy GitHub Pages` workflow from the `Actions` tab.
+
+## Manual Deploy To GitHub Pages
 
 1. Upload `index.html` and `README.md` to your GitHub repository:
    `https://github.com/SpandRagon98/Exora-Solutions`
