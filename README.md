@@ -12,19 +12,23 @@ No build tools, package installation, or framework setup is required.
 
 ## Automatic Deploy With GitHub Actions
 
-This repository includes `.github/workflows/deploy.yml`, which deploys the static site to GitHub Pages whenever changes are pushed to `main`.
+This repository includes `.github/workflows/deploy.yml`, which publishes the static site to a `gh-pages` branch whenever changes are pushed to `main`.
 
-The workflow creates a clean `public` folder during the GitHub Actions run and copies only `index.html` plus a `.nojekyll` marker into it before deploying.
+The workflow creates a clean deployment folder during the GitHub Actions run and publishes only `index.html` plus a `.nojekyll` marker to the `gh-pages` branch.
 
 To enable it:
 
 1. In GitHub, open the repository and go to `Settings > Pages`.
-2. Under `Build and deployment`, set the source to `GitHub Actions`.
-3. Push changes to the `main` branch, or manually run the `Deploy GitHub Pages` workflow from the `Actions` tab.
+2. Under `Build and deployment`, set the source to `Deploy from a branch`.
+3. Choose:
+   - Branch: `gh-pages`
+   - Folder: `/ (root)`
+4. Save the settings.
+5. Push changes to the `main` branch, or manually run the `Deploy GitHub Pages` workflow from the `Actions` tab.
 
-If GitHub Actions shows `Get Pages site failed`, Pages is not enabled for Actions yet. Go back to `Settings > Pages`, confirm the source is set to `GitHub Actions`, save the setting, then rerun the workflow.
+If the `gh-pages` branch is not available in the Pages settings yet, run the `Deploy GitHub Pages` workflow once from the `Actions` tab. The workflow creates the branch.
 
-Optional: to let the workflow enable GitHub Pages automatically on a brand-new repository, add a repository secret named `PAGES_ADMIN_TOKEN` with a token that has Pages write permission. The default `GITHUB_TOKEN` cannot enable Pages on a repository that has Pages turned off.
+If GitHub Actions cannot push the `gh-pages` branch, go to `Settings > Actions > General > Workflow permissions` and select `Read and write permissions`.
 
 GitHub Pages will publish the site at:
 
