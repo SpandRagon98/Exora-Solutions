@@ -5,13 +5,16 @@ Single-page agency website for EXORA SOLUTIONS, prepared for direct GitHub Pages
 ## Files
 
 - `index.html` - complete React single-page website with inline CSS and Babel-powered React components.
+- `.github/workflows/deploy.yml` - GitHub Actions workflow for GitHub Pages deployment.
 - `README.md` - deployment instructions.
 
 No build tools, package installation, or framework setup is required.
 
 ## Automatic Deploy With GitHub Actions
 
-This repository includes `.github/workflows/deploy.yaml`, which deploys the static site to GitHub Pages whenever changes are pushed to `main`.
+This repository includes `.github/workflows/deploy.yml`, which deploys the static site to GitHub Pages whenever changes are pushed to `main`.
+
+The workflow creates a clean `public` folder during the GitHub Actions run and copies only `index.html` into it before deploying.
 
 To enable it:
 
@@ -19,17 +22,7 @@ To enable it:
 2. Under `Build and deployment`, set the source to `GitHub Actions`.
 3. Push changes to the `main` branch, or manually run the `Deploy GitHub Pages` workflow from the `Actions` tab.
 
-## Manual Deploy To GitHub Pages
-
-1. Upload `index.html` and `README.md` to your GitHub repository:
-   `https://github.com/SpandRagon98/Exora-Solutions`
-2. Make sure both files are in the repository root, not inside a subfolder.
-3. In GitHub, open the repository and go to `Settings > Pages`.
-4. Under `Build and deployment`, set the source to `Deploy from a branch`.
-5. Choose:
-   - Branch: `main`
-   - Folder: `/ (root)`
-6. Save the settings.
+If GitHub Actions shows `Get Pages site failed`, Pages is not enabled for Actions yet. Go back to `Settings > Pages` and confirm the source is set to `GitHub Actions`, then rerun the workflow.
 
 GitHub Pages will publish the site at:
 
