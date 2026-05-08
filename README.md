@@ -24,6 +24,8 @@ To enable it:
 
 If GitHub Actions shows `Get Pages site failed`, Pages is not enabled for Actions yet. Go back to `Settings > Pages`, confirm the source is set to `GitHub Actions`, save the setting, then rerun the workflow.
 
+Optional: to let the workflow enable GitHub Pages automatically on a brand-new repository, add a repository secret named `PAGES_ADMIN_TOKEN` with a token that has Pages write permission. The default `GITHUB_TOKEN` cannot enable Pages on a repository that has Pages turned off.
+
 GitHub Pages will publish the site at:
 
 ```text
