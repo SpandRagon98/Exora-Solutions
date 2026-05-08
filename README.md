@@ -14,7 +14,7 @@ No build tools, package installation, or framework setup is required.
 
 This repository includes `.github/workflows/deploy.yml`, which deploys the static site to GitHub Pages whenever changes are pushed to `main`.
 
-The workflow creates a clean `public` folder during the GitHub Actions run and copies only `index.html` into it before deploying.
+The workflow creates a clean `public` folder during the GitHub Actions run and copies only `index.html` plus a `.nojekyll` marker into it before deploying.
 
 To enable it:
 
@@ -22,7 +22,7 @@ To enable it:
 2. Under `Build and deployment`, set the source to `GitHub Actions`.
 3. Push changes to the `main` branch, or manually run the `Deploy GitHub Pages` workflow from the `Actions` tab.
 
-If GitHub Actions shows `Get Pages site failed`, Pages is not enabled for Actions yet. Go back to `Settings > Pages` and confirm the source is set to `GitHub Actions`, then rerun the workflow.
+If GitHub Actions shows `Get Pages site failed`, Pages is not enabled for Actions yet. Go back to `Settings > Pages`, confirm the source is set to `GitHub Actions`, save the setting, then rerun the workflow.
 
 GitHub Pages will publish the site at:
 
