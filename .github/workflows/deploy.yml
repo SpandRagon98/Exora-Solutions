@@ -1,4 +1,4 @@
-name: Publish Static Site To gh-pages
+name: Deploy static site
 
 on:
   push:
@@ -7,50 +7,41 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: gh-pages
+  group: github-pages
   cancel-in-progress: true
 
 jobs:
   deploy:
-    name: Publish static site
+    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Prepare deployment folder
         run: |
-          test -f index.html
-          rm -rf "$RUNNER_TEMP/exora-pages"
-          mkdir -p "$RUNNER_TEMP/exora-pages"
-          cp index.html "$RUNNER_TEMP/exora-pages/index.html"
-          touch "$RUNNER_TEMP/exora-pages/.nojekyll"
+          rm -rf public
+          mkdir public
+          cp index.html public/index.html
 
-      - name: Publish to gh-pages branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
-          git fetch origin gh-pages --depth=1 || true
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
 
-          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
-            git switch --force-create gh-pages origin/gh-pages
-          else
-            git switch --orphan gh-pages
-          fi
-
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -R "$RUNNER_TEMP/exora-pages/." .
-
-          git add index.html .nojekyll
-
-          if git diff --cached --quiet; then
-            echo "No site changes to publish."
-          else
-            git commit -m "Deploy static site from ${GITHUB_SHA}"
-            git push origin gh-pages
-          fi
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
