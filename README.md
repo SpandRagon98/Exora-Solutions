@@ -16,6 +16,8 @@ This repository includes `.github/workflows/deploy.yml`, which publishes the sta
 
 The workflow creates a clean deployment folder during the GitHub Actions run and publishes only `index.html` plus a `.nojekyll` marker to the `gh-pages` branch.
 
+The active workflow name is `Publish Static Site To gh-pages`. Older failed runs named `Deploy GitHub Pages` used GitHub's Pages deployment API and can be ignored.
+
 To enable it:
 
 1. In GitHub, open the repository and go to `Settings > Pages`.
@@ -24,7 +26,7 @@ To enable it:
    - Branch: `gh-pages`
    - Folder: `/ (root)`
 4. Save the settings.
-5. Push changes to the `main` branch, or manually run the `Deploy GitHub Pages` workflow from the `Actions` tab.
+5. Push changes to the `main` branch, or manually run the `Publish Static Site To gh-pages` workflow from the `Actions` tab.
 
 If the `gh-pages` branch is not available in the Pages settings yet, run the `Deploy GitHub Pages` workflow once from the `Actions` tab. The workflow creates the branch.
 

@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: Publish Static Site To gh-pages
 
 on:
   push:
